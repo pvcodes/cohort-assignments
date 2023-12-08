@@ -7,7 +7,21 @@ Try running it for
 Hint - use Date class exposed in JS
 There is no automated test for this one, this is more for you to understand time goes up as computation goes up
 */
+// const Date = require('Date');
 
 function calculateTime(n) {
-    return 0.01;
+    let sum = 0;
+    const d1 = Date.now();
+    for (let i = 0; i < n; i++) {
+        sum += i;
+    }
+    const d2 = Date.now();
+    return (d2 - d1) / 1000;
+}
+
+
+let arr = [100, 100000, 1000000000, 1000000000000];
+
+for (const i of arr) {
+    console.log("Time taken to sum from 0-" + i + " is: " + calculateTime(i) + " seconds");
 }
