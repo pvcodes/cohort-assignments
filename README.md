@@ -1,4 +1,3 @@
-theme: jekyll-theme-minimal
 # COHORT 2.0
 
 <details>
