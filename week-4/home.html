@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            margin-top: 1rem;
+            margin-left: 2rem;
+        }
+
+        .completed-todos {
+            text-decoration: line-through;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <script>
+
+        let id = 1
+
+        function addTodo() {
+            title = document.getElementById("title").value
+            desc = document.getElementById("desc").value
+
+            container = document.getElementById("container")
+            todo = document.createElement("div")
+            todo.classList.add("todos");
+            todo.setAttribute("id", id++)
+
+            todo_p = document.createElement("p")
+            todo_desc = document.createElement("p")
+            todo_btn = document.createElement("button")
+
+
+            todo_p.innerHTML = title
+            todo_desc.innerHTML = desc
+            todo_btn.innerHTML = "Mark as Done"
+            todo_btn.setAttribute("onClick", `onTodoDone(${id - 1})`)
+
+            todo.appendChild(todo_p)
+            todo.appendChild(todo_desc)
+            todo.appendChild(todo_btn)
+
+
+            container.appendChild(todo)
+            document.body.insert(todo)
+
+        }
+
+        function onTodoDone(id) {
+            todo = document.getElementById(id)
+            todo.classList.add("completed-todos")
+
+        }
+
+    </script>
+
+    <div>
+        <input id="title" type="text" placeholder="Your todo">
+        <input id="desc" type="text" placeholder="Description">
+        <button onclick="addTodo()">Add Todo :)</button>
+    </div>
+    <div id="container">
+
+
+    </div>
+
+
+</body>
+
+</html>
