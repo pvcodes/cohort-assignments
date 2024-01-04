@@ -25,8 +25,85 @@
 </head>
 
 
+
 <body>
     <script>
+        // state -> array of object with title, desc, id
+
+
+        async function getTodos() {
+            res = await fetch('https://dummyjson.com/todos?limit=3')
+            // console.log(res);
+            todos = await res.json()
+            todos = todos.todos
+            return todos
+        }
+        // getTodos()
+        // const state = [
+        //     {
+        //         title: "Todo 1",
+        //         desc: "Desc 1",
+        //         id: 1
+        //     },
+        //     {
+        //         title: "Todo 2",
+        //         desc: "Desc 2",
+        //         id: 2
+        //     },
+        //     {
+        //         title: "Todo 3",
+        //         desc: "Desc 3",
+        //         id: 3
+        //     },
+        //     {
+        //         title: "Todo 4",
+        //         desc: "Desc 4",
+        //         id: 4
+        //     }
+        // ]
+
+
+        // window.setInterval(async () => {
+        //     todos = await getTodos()
+        //     updateDomAccToState(todos)
+
+        // }, 5000)
+
+
+        function updateDomAccToState(state) {
+
+            container = document.getElementById("container")
+            container.innerHTML = ''
+
+            state.forEach(obj => {
+                console.log(obj);
+
+                todo = document.createElement("div")
+                todo_p = document.createElement("p")
+                todo_desc = document.createElement("p")
+                todo_btn = document.createElement("button")
+
+                todo.classList.add("todos");
+                todo.setAttribute("id", obj.id)
+
+                todo_p.innerHTML = obj.todo
+                todo_desc.innerHTML = obj.userId
+                todo_btn.innerHTML = "Mark as Done"
+                todo_btn.setAttribute("onClick", `onTodoDone(${obj.id})`)
+
+
+                todo.appendChild(todo_p)
+                todo.appendChild(todo_desc)
+                todo.appendChild(todo_btn)
+
+                container.appendChild(todo)
+                // document.body.insert(todo)
+
+            });
+
+        }
+
+
 
         let id = 1
 
@@ -35,6 +112,7 @@
             desc = document.getElementById("desc").value
 
             container = document.getElementById("container")
+
             todo = document.createElement("div")
             todo.classList.add("todos");
             todo.setAttribute("id", id++)
@@ -55,13 +133,18 @@
 
 
             container.appendChild(todo)
-            document.body.insert(todo)
+            // document.body.insert(todo)
 
         }
 
         function onTodoDone(id) {
             todo = document.getElementById(id)
             todo.classList.add("completed-todos")
+
+            btn = todo.getElementsByTagName("button")[0]
+            btn.innerHTML = "Done!"
+
+
 
         }
 
@@ -72,6 +155,8 @@
         <input id="desc" type="text" placeholder="Description">
         <button onclick="addTodo()">Add Todo :)</button>
     </div>
+
+    <button onclick="updateDomAccToState()">JAADDU DEKHO</button>
     <div id="container">
 
 

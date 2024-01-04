@@ -8,15 +8,16 @@
     let oldTodoState = [];
 
     function addTodoToDom() {
-      
+
     }
 
     function removeTodoFromDom(todo) {
-      
+      ele = document.getElementById(todo.id)
+      ele.parent.removeChild(ele)
     }
 
     function updateTodoInDom(oldTodo, newTodo) {
-        
+
     }
 
     function updateState(newTodos) {
@@ -28,6 +29,29 @@
       const added = [];
       const deleted = [];
       const updated = [];
+
+      for (const oldTodo in oldTodoState) {
+        for (const newTodo in newTodos) {
+          // updated
+          exist = false
+          if (oldTodo.id == newTodo.id) {
+            if (oldTodo.title != newTodo.title || oldTodo.description != newTodo.description)
+              exist = true
+            // added.push(newTodo)
+          }
+          if (oldTodo.title != newTodo.title || oldTodo.description != newTodo.description) {
+            updated.push(newTodo)
+          } else {
+
+          }
+        }
+      }
+
+
+
+
+
+
       // calculate these 3 arrays
       // call addTodo, removeTodo, updateTodo functions on each of the
       // elements
