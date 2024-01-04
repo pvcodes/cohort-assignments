@@ -10,6 +10,7 @@ const USERSCHEMA_ZOD = zod.object({
 
 function validateInput(user) {
     if (USERSCHEMA_ZOD.safeParse(user).success) return true;
+    
     else false;
 }
 

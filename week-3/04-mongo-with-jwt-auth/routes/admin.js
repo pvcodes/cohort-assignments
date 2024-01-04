@@ -11,6 +11,7 @@ const { Admin, Course } = require("../db");
 require('dotenv').config();
 
 
+
 const HEADERSCHEMA_ZOD = zod.object({
     username: zod.string().email(),
     password: zod.string().min(6)
@@ -111,16 +112,23 @@ router.get('/courses', adminMiddleware2, async (req, res) => {
 
 
     try {
-        allCourses = []
         user = await Admin.findOne({ username })
         cid = user.courseIds
-
+        console.log(`ISHI`);
         // allCourses = await getCourses(cid)
-        cid.forEach(async id => {
-            course = await getCourse(id)
-            allCourses.push(course)
-            console.log(allCourses.length);
-        });
+
+        allCourses = await Course.find({
+            _id: {
+                $in: cid
+            }
+        })
+
+
+        // cid.forEach(async id => {
+        //     course = await getCourse(id)
+        //     allCourses.push(course)
+        //     console.log(allCourses.length);
+        // });
 
         console.log('something');
         res.json({ allCourses })
